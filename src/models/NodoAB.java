@@ -48,4 +48,12 @@ public class NodoAB {
     public void asignaDato(Object dato) {
         this.dato = dato;
     }
+
+    public NodoAB retornaAbuelo(){
+        if(this.retornaPadre() != null){
+            return this.retornaPadre().retornaPadre();
+        }else {
+            return null;
+        }
+    }
 }

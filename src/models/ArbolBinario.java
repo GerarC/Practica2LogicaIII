@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Stack;
 
 public class ArbolBinario {
@@ -65,7 +67,14 @@ public class ArbolBinario {
                     padre = ultimo;
                     x = new NodoAB(null);
                     x.asignaPadre(padre);
-                    padre.asignaHI(x);
+                    c = s.charAt(i + 1);
+                    if(c == ','){
+                        padre.asignaHD(x);
+                        i++;
+                    }else{
+                        padre.asignaHI(x);
+                    }
+
                     ultimo = x;
                     break;
                 case ',':
@@ -138,39 +147,37 @@ public class ArbolBinario {
 
     public void printPreorden(NodoAB r){
         if(r != null){
-            if(r.retornaPadre() == null || r.retornaPadre().retornaHD() != r) System.out.print("(");
-            System.out.print(r.retornaDato());
             if (r.retornaHI() == null && r.retornaHD() == null) {
                 return;
             }
+            if(r.retornaPadre() == null || r.retornaPadre().retornaHD() != r) System.out.println("(");
+            System.out.println(r.retornaDato());
             if (r.retornaHI() != null){
-                printPreorden(r.retornaHI());
+                System.out.println(preordenString(r.retornaHI()));
             }
             if(r.retornaHD() != null){
-                System.out.print(",");
-                printPreorden(r.retornaHD());
+                if(r.retornaHI() == null) System.out.println("(");
+                System.out.println(",");
+                System.out.println(preordenString(r.retornaHD()));
             }
-            System.out.print(")");
+            if( r.retornaPadre() == null || r.retornaPadre().retornaHD() == null || r.retornaPadre().retornaHD() == r) System.out.println(")");
         }
     }
 
     public String preordenString(NodoAB r){
         StringBuilder sb = new StringBuilder();
         if(r != null){
-
             if(r.retornaPadre() == null || r.retornaPadre().retornaHD() != r) sb.append("(");
             sb.append(r.retornaDato());
-            if (r.retornaHI() == null && r.retornaHD() == null) {
-                return sb.toString();
-            }
             if (r.retornaHI() != null){
                 sb.append(preordenString(r.retornaHI()));
             }
             if(r.retornaHD() != null){
+                if(r.retornaHI() == null) sb.append("(");
                 sb.append(",");
                 sb.append(preordenString(r.retornaHD()));
             }
-            sb.append(")");
+            if( r.retornaPadre() == null || r.retornaPadre().retornaHD() == null || r.retornaPadre().retornaHD() == r) sb.append(")");
         }
         return sb.toString();
     }
@@ -260,6 +267,70 @@ public class ArbolBinario {
 
     //endregion
 
+    public NodoAB crearArbolRecursivamente(int n, String nodos){
+        /*Este método crea aleatoria y recursivamente un arbol con la altura dada, y además,
+        los caracteres de los nodos serán definidos por un String*/
+        NodoAB raiz, hi, hd;
+        int i;
+        Random r;
+        if(n <= 0){                                                       //El if hace que el método retorne nulo si se pasa de la altura buscada
+            return null;
+        }
+        r = new Random();
+        i = r.nextInt(nodos.length() + nodos.length() / 4);            //Hace un número pseudoaleatorio que será el que decida si el nodo existe o no, además de elegir también el átomo
+        if(i < nodos.length()){                                          //Si i está en el rango del tamaño del String le pondrá como dato al nodo el caracter en la posición i, si no, entonces retornará null
+            raiz = new NodoAB(nodos.charAt(i));
+        }else{
+            return null;
+        }
+        hi = crearArbolRecursivamente(n - 1, nodos);                   //Crea la raiz de lo que será el sub arbol izquierdo
+        hd = crearArbolRecursivamente(n - 1, nodos);                   //Crea la raiz de lo que será el sub arbol derecho
+        if(hi != null) {
+            hi.asignaPadre(raiz);
+        }
+        if(hd != null) {
+            hd.asignaPadre(raiz);
+        }
+        raiz.asignaHI(hi);
+        raiz.asignaHD(hd);
+        return raiz;
+    }
+
+    public static ArbolBinario crearArbolAleatorio(int n, String nodos){
+       ArbolBinario ab;
+       NodoAB raiz;
+
+       ab = new ArbolBinario();
+       do{
+           raiz = ab.crearArbolRecursivamente(n, nodos);
+       }while (raiz == null);
+
+       ab.asignaRaiz(raiz);
+
+       return ab;
+    }
+
+    public ArrayList<NodoAB> ancestrosDelNodo(NodoAB r){
+        ArrayList<NodoAB> ancestros, aux;
+        if (r != null){
+            ancestros = new ArrayList<>();
+            aux = null;
+        }else {
+            return null;
+        }
+        if(r.retornaPadre() != null){
+            ancestros.add(r.retornaPadre());
+            aux = ancestrosDelNodo(r.retornaPadre());
+        }
+        if (aux != null){
+            for(NodoAB nab: aux){
+                if(nab != null){
+                    ancestros.add(nab);
+                }
+            }
+        }
+        return ancestros;
+    }
 
 
 }
