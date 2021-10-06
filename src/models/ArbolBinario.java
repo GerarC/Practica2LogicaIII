@@ -116,6 +116,25 @@ public class ArbolBinario {
        return hojas;
     }
 
+    public int gradoAB(NodoAB raiz){
+        int g;
+        g = 0;
+        if(raiz != null){
+            if(raiz.retornaHI() != null && raiz.retornaHD() != null){
+                g = 2;
+            }else {
+                if(raiz.retornaHI() != null || raiz.retornaHD() != null){
+                    g = 1;
+                }
+            }
+            if (g == 2) return g;
+            g = gradoAB(raiz.retornaHI());
+            if (g == 2) return g;
+            g = gradoAB(raiz.retornaHD());
+        }
+        return g;
+    }
+
     public int alturaAB(NodoAB r, int nivel){
         int altura, alturaI, alturaD;
         if(r == null) return 0;
@@ -330,6 +349,36 @@ public class ArbolBinario {
             }
         }
         return ancestros;
+    }
+
+    public ArrayList<NodoAB> retornaHojasAB(NodoAB r){
+        ArrayList<NodoAB> hojas, hojasI, hojasD;
+        if(r == null) return null;
+        hojas = new ArrayList<>();
+        if(r.retornaHI() == null && r.retornaHD() == null) hojas.add(r);
+
+        hojasI = retornaHojasAB(r.retornaHI());
+        hojasD = retornaHojasAB(r.retornaHD());
+
+        if (hojasI != null){
+            for(NodoAB nab: hojasI){
+                if(nab != null){
+                    hojas.add(nab);
+                }
+            }
+        }
+        if (hojasD != null){
+            for(NodoAB nab: hojasD){
+                if(nab != null){
+                    hojas.add(nab);
+                }
+            }
+        }
+
+        /*hojas = 0;
+        hojas += hojasAB(r.retornaHI());
+        hojas += hojasAB(r.retornaHD());*/
+        return hojas;
     }
 
 

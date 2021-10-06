@@ -27,23 +27,23 @@ public class Main extends Application {
     Lógica
     todo Método que permita que el usuario ingrese el árbol                     ---Ya
     todo Método que cree un arbol binario dada una altura n                     ---Ya
-    todo Método que retorne el número de hijos y cuáles son los hijos del nodo
+    todo Método que retorne el número de hijos y cuáles son los hijos del nodo  ---Ya
     todo Método que retorne cual es el padre                                    ---Ya
-    todo Método que retorno cual el abuelo                                      ---
-    todo Método que retorne cuales son los ancestros
-    todo Método que retorne el tio
-    todo Método que retorne si el nodo es derecho o izquierdo
-    todo Método que retorne el hermano, si es que tiene
+    todo Método que retorno cual el abuelo                                      ---Ya
+    todo Método que retorne cuales son los ancestros                            ---Ya
+    todo Método que retorne el tio                                              ---Ya
+    todo Método que retorne si el nodo es derecho o izquierdo                   ---Ya
+    todo Método que retorne el hermano, si es que tiene                         ---Ya
 
     todo Método que retorne la altura                                           ---Ya
-    todo Método que retorne el grado del árbol
-    todo Método que retorne cuales son las hojas
+    todo Método que retorne el grado del árbol                                  ---Ya
+    todo Método que retorne cuales son las hojas                                ---Ya
 
     //Recorridos
     todo Métodos de recorrido del el árbol (inorden, posorden, preorden)        ---Listo Preorden
-    todo Métodos que permitan leer un árbol en cualquier recorrido y que lo construyan a partir de esto
+    todo Métodos que permitan leer un árbol en cualquier recorrido y que lo construyan a partir de esto  ---Listo Preorden
 
-
+    todo Comentar los métodos :c
 
 
 
