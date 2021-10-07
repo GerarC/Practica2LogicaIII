@@ -13,7 +13,7 @@ public class Pruebas {
         arbolString = "(A(B(,V(6(,T(H,B)),Y)),F(V,L))";
         nodosString = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
         ab = ArbolBinario.crearArbolAleatorio(5, nodosString);/*"ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"*/
-        ab.dibujaArbol(ab.retornaRaiz());
+        ab.imprimeArbol(ab.retornaRaiz());
         System.out.println(ab.preordenString(ab.retornaRaiz()));
 
 

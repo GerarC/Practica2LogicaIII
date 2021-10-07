@@ -201,6 +201,98 @@ public class ArbolBinario {
         return sb.toString();
     }
 
+    public NodoAB crearArbolRecursivamente(int n, String nodos){
+        /*Este método crea aleatoria y recursivamente un arbol con la altura dada, y además,
+        los caracteres de los nodos serán definidos por un String*/
+        NodoAB raiz, hi, hd;
+        int i;
+        Random r;
+        if(n <= 0){                                                       //El if hace que el método retorne nulo si se pasa de la altura buscada
+            return null;
+        }
+        r = new Random();
+        i = r.nextInt(nodos.length() + nodos.length() / 4);            //Hace un número pseudoaleatorio que será el que decida si el nodo existe o no, además de elegir también el átomo
+        if(i < nodos.length()){                                          //Si i está en el rango del tamaño del String le pondrá como dato al nodo el caracter en la posición i, si no, entonces retornará null
+            raiz = new NodoAB(nodos.charAt(i));
+        }else{
+            return null;
+        }
+        hi = crearArbolRecursivamente(n - 1, nodos);                   //Crea la raiz de lo que será el sub arbol izquierdo
+        hd = crearArbolRecursivamente(n - 1, nodos);                   //Crea la raiz de lo que será el sub arbol derecho
+        if(hi != null) {
+            hi.asignaPadre(raiz);
+        }
+        if(hd != null) {
+            hd.asignaPadre(raiz);
+        }
+        raiz.asignaHI(hi);
+        raiz.asignaHD(hd);
+        return raiz;
+    }
+
+    public static ArbolBinario crearArbolAleatorio(int n, String nodos){
+        ArbolBinario ab;
+        NodoAB raiz;
+
+        ab = new ArbolBinario();
+        do{
+            raiz = ab.crearArbolRecursivamente(n, nodos);
+        }while (raiz == null);
+
+        ab.asignaRaiz(raiz);
+
+        return ab;
+    }
+
+    public ArrayList<NodoAB> ancestrosDelNodo(NodoAB r){
+        ArrayList<NodoAB> ancestros, aux;
+        if (r != null){
+            ancestros = new ArrayList<>();
+            aux = null;
+        }else {
+            return null;
+        }
+        if(r.retornaPadre() != null){
+            ancestros.add(r.retornaPadre());
+            aux = ancestrosDelNodo(r.retornaPadre());
+        }
+        if (aux != null){
+            for(NodoAB nab: aux){
+                if(nab != null){
+                    ancestros.add(nab);
+                }
+            }
+        }
+        return ancestros;
+    }
+
+    public ArrayList<NodoAB> retornaHojasAB(NodoAB r){
+        ArrayList<NodoAB> hojas, hojasI, hojasD;
+        if(r == null) return null;
+        hojas = new ArrayList<>();
+        if(r.retornaHI() == null && r.retornaHD() == null) hojas.add(r);
+
+        hojasI = retornaHojasAB(r.retornaHI());
+        hojasD = retornaHojasAB(r.retornaHD());
+
+        if (hojasI != null){
+            for(NodoAB nab: hojasI){
+                if(nab != null){
+                    hojas.add(nab);
+                }
+            }
+        }
+        if (hojasD != null){
+            for(NodoAB nab: hojasD){
+                if(nab != null){
+                    hojas.add(nab);
+                }
+            }
+        }
+
+        return hojas;
+    }
+
     //region Métodos para Crear un "Dibujo" del árbol
 
     private String creaStringConector(int altura){
@@ -260,7 +352,7 @@ public class ArbolBinario {
         return nodos.toString();
     }
 
-    public void dibujaArbol(NodoAB r){
+    public void imprimeArbol(NodoAB r){
         StringBuilder sb = new StringBuilder();
         String fila, espacioEntre, espacioFuera;
         int altura, alturaAux, numeroEspacio;
@@ -274,112 +366,45 @@ public class ArbolBinario {
                 fila = String.join(espacioEntre, fila.split(""));
                 fila = ponerEspacios(fila, alturaAux - 1);
                 numeroEspacio = numeroSecucencia(alturaAux - 1);
-                espacioFuera = repiteString(" ", numeroEspacio);
+                espacioFuera = repiteString(" ", numeroEspacio - 1);
                 System.out.println(fila);
-                System.out.println(ponerEspacios(creaStringConector(altura + 1 -i) + espacioFuera + creaStringConector(altura + 1 -i) , altura + 1 - i) );
+                /*if(i < altura){
+                    System.out.println(ponerEspacios(creaStringConector(altura + 1 -i) + espacioFuera, altura - i  + 1) );
+                }*/
+
             //}else{
 
            // }
             alturaAux--;
         }
     }
+    public void dibujaArbol(NodoAB r){
+        StringBuilder sb = new StringBuilder();
+        String fila, espacioEntre, espacioFuera;
+        int altura, alturaAux, numeroEspacio;
+        altura = alturaAB(raiz, 1);
+        alturaAux = altura + 2;
+        for(int i = 1; i <= altura; i++){
+            //if(i < altura){
+            numeroEspacio = numeroSecucencia(alturaAux);
+            espacioEntre = repiteString(" ", numeroEspacio);
+            fila = nodosNivelImprimir(r, 1 , i);
+            fila = String.join(espacioEntre, fila.split(""));
+            fila = ponerEspacios(fila, alturaAux - 1);
+            numeroEspacio = numeroSecucencia(alturaAux - 1);
+            espacioFuera = repiteString(" ", numeroEspacio - 1);
+            System.out.println(fila);
+                /*if(i < altura){
+                    System.out.println(ponerEspacios(creaStringConector(altura + 1 -i) + espacioFuera, altura - i  + 1) );
+                }*/
+
+            //}else{
+
+            // }
+            alturaAux--;
+        }
+    }
 
     //endregion
-
-    public NodoAB crearArbolRecursivamente(int n, String nodos){
-        /*Este método crea aleatoria y recursivamente un arbol con la altura dada, y además,
-        los caracteres de los nodos serán definidos por un String*/
-        NodoAB raiz, hi, hd;
-        int i;
-        Random r;
-        if(n <= 0){                                                       //El if hace que el método retorne nulo si se pasa de la altura buscada
-            return null;
-        }
-        r = new Random();
-        i = r.nextInt(nodos.length() + nodos.length() / 4);            //Hace un número pseudoaleatorio que será el que decida si el nodo existe o no, además de elegir también el átomo
-        if(i < nodos.length()){                                          //Si i está en el rango del tamaño del String le pondrá como dato al nodo el caracter en la posición i, si no, entonces retornará null
-            raiz = new NodoAB(nodos.charAt(i));
-        }else{
-            return null;
-        }
-        hi = crearArbolRecursivamente(n - 1, nodos);                   //Crea la raiz de lo que será el sub arbol izquierdo
-        hd = crearArbolRecursivamente(n - 1, nodos);                   //Crea la raiz de lo que será el sub arbol derecho
-        if(hi != null) {
-            hi.asignaPadre(raiz);
-        }
-        if(hd != null) {
-            hd.asignaPadre(raiz);
-        }
-        raiz.asignaHI(hi);
-        raiz.asignaHD(hd);
-        return raiz;
-    }
-
-    public static ArbolBinario crearArbolAleatorio(int n, String nodos){
-       ArbolBinario ab;
-       NodoAB raiz;
-
-       ab = new ArbolBinario();
-       do{
-           raiz = ab.crearArbolRecursivamente(n, nodos);
-       }while (raiz == null);
-
-       ab.asignaRaiz(raiz);
-
-       return ab;
-    }
-
-    public ArrayList<NodoAB> ancestrosDelNodo(NodoAB r){
-        ArrayList<NodoAB> ancestros, aux;
-        if (r != null){
-            ancestros = new ArrayList<>();
-            aux = null;
-        }else {
-            return null;
-        }
-        if(r.retornaPadre() != null){
-            ancestros.add(r.retornaPadre());
-            aux = ancestrosDelNodo(r.retornaPadre());
-        }
-        if (aux != null){
-            for(NodoAB nab: aux){
-                if(nab != null){
-                    ancestros.add(nab);
-                }
-            }
-        }
-        return ancestros;
-    }
-
-    public ArrayList<NodoAB> retornaHojasAB(NodoAB r){
-        ArrayList<NodoAB> hojas, hojasI, hojasD;
-        if(r == null) return null;
-        hojas = new ArrayList<>();
-        if(r.retornaHI() == null && r.retornaHD() == null) hojas.add(r);
-
-        hojasI = retornaHojasAB(r.retornaHI());
-        hojasD = retornaHojasAB(r.retornaHD());
-
-        if (hojasI != null){
-            for(NodoAB nab: hojasI){
-                if(nab != null){
-                    hojas.add(nab);
-                }
-            }
-        }
-        if (hojasD != null){
-            for(NodoAB nab: hojasD){
-                if(nab != null){
-                    hojas.add(nab);
-                }
-            }
-        }
-
-        /*hojas = 0;
-        hojas += hojasAB(r.retornaHI());
-        hojas += hojasAB(r.retornaHD());*/
-        return hojas;
-    }
-
 
 }
