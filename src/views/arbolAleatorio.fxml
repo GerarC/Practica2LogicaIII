@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ArbolNuevoController">
+    <top>
+        <MenuBar fx:id="mnuBar" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Archivo">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#mnuCrearArbolNuevo_action" text="Crear arbol nuevo" />
+                        <MenuItem mnemonicParsing="false" onAction="#mnuCrearArbolAleatorio_action" text="Crear Arbol Aleatorio" />
+                        <MenuItem mnemonicParsing="false" onAction="#mnuMostrarArbol_action" text="Mostrar arbol" />
+                        <MenuItem mnemonicParsing="false" onAction="#mnuSalir_action" text="Salir" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#mnuAyuda_action" text="Ayuda" />
+                        <MenuItem mnemonicParsing="false" onAction="#mnuAcerca_action" text="Acerca de" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <content>
+                <TextArea fx:id="textArea" prefHeight="600.0" prefWidth="900.0" />
+            </content>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <BorderPane prefHeight="0.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+    </bottom>
+    <left>
+        <AnchorPane prefHeight="375.0" prefWidth="87.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="4.0" layoutY="29.0" text="Elige el Nodo:">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <ComboBox fx:id="InfoCB" layoutX="10.0" layoutY="197.0" prefHeight="25.0" prefWidth="75.0" promptText="Info" />
+                <Label layoutX="1.0" layoutY="168.0" text="¿Que Deseas Ver?:">
+                    <font>
+                        <Font name="System Bold" size="11.0" />
+                    </font>
+                </Label>
+                <ComboBox fx:id="NodoCb" layoutX="10.0" layoutY="58.0" prefHeight="25.0" prefWidth="74.0" promptText="Nodo" />
+                <Button fx:id="BtnMostrar" layoutX="18.0" layoutY="271.0" mnemonicParsing="false" onAction="#BtnAction" text="Mostrar" />
+            </children>
+        </AnchorPane>
+    </left>
+    <right>
+        <AnchorPane prefHeight="375.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+    </right>
+</BorderPane>

@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.mainController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+   <top>
+      <MenuBar fx:id="mnuBar" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#mnuCrearArbolNuevo_action" text="Crear arbol nuevo" />
+                  <MenuItem mnemonicParsing="false" onAction="#mnuCrearArbolAleatorio_action" text="Crear Arbol Aleatorio" />
+                  <MenuItem mnemonicParsing="false" onAction="#mnuMostrarArbol_action" text="Mostrar arbol" />
+              <MenuItem mnemonicParsing="false" onAction="#mnuSalir_action" text="Salir" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Ayuda">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#mnuAyuda_action" text="Ayuda" />
+              <MenuItem mnemonicParsing="false" onAction="#mnuAcerca_action" text="Acerca de" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="143.0" layoutY="42.0" text="Bienvenido!">
+               <font>
+                  <Font name="System Bold" size="61.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="167.0" text="Elija la Opcion que desee En el menu de Arriba" textFill="#ea1e1e">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
