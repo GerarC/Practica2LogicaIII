@@ -10,16 +10,25 @@ public class Pruebas {
         NodoAB tio, hermano;
         String arbolString, nodosString;
         ArbolBinario ab;
-        arbolString = "(A(B(,V(6(,T(H,B)),Y)),F(V,L))";
         nodosString = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-        ab = ArbolBinario.crearArbolAleatorio(5, nodosString);/*"ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"*/
-        ab.imprimeArbol(ab.retornaRaiz());
+        ab = ArbolBinario.crearArbolAleatorio(6, nodosString); /*"ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"*/
+        System.out.println(ab.ArbolString(ab.retornaRaiz()));
         System.out.println(ab.preordenString(ab.retornaRaiz()));
+
+
+        arbolString = "(H(K(N),U(R(S(P,J),N(J,A)),O(,S(N,Ñ)))))";
 
 
 
         ab.construyeAB(arbolString);
         System.out.println(arbolString);
+        System.out.println(ab.preordenString(ab.retornaRaiz()));
+        System.out.println(ab.ArbolString(ab.retornaRaiz()));
+
+
+        arbolString = "(A(B(,V(6(,T(H,B)),Y)),F(V,L))";
+        ab.construyeAB(arbolString);
+        System.out.println(ab.ArbolString(ab.retornaRaiz()));
         System.out.println(ab.preordenString(ab.retornaRaiz()));
 
 

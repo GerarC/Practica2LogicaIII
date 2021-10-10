@@ -295,18 +295,6 @@ public class ArbolBinario {
 
     //region Métodos para Crear un "Dibujo" del árbol
 
-    private String creaStringConector(int altura){
-        //Crea un String conector de nodos
-        String s;
-        if (altura == 0) return this.repiteString(" ", this.numeroSecucencia(altura));
-        s = "╔";
-        s = s + this.repiteString("═", this.numeroSecucencia(altura));
-        s += "╩";
-        s = s + this.repiteString("═", this.numeroSecucencia(altura));
-        s = s + "╗";
-        return s;
-    }
-
     private String ponerEspacios(String str, int altura){
         //Pone los espacios necesesarios para separar nodos o conectores a determinada altura
         String espacio = this.repiteString(" ", this.numeroSecucencia(altura));
@@ -339,72 +327,91 @@ public class ArbolBinario {
     public String nodosNivelImprimir(NodoAB r, int nivelActual, int nivelImprimir){
         StringBuilder nodos =  new StringBuilder();
         if(r == null) {
-            nodos.append(" ");
+            nodos.append("0");
             return nodos.toString();
         }
-        if(nivelActual == 0) return "";
+        if(nivelActual == 0) return " ";
         if(nivelImprimir == nivelActual) {
             nodos.append(r.retornaDato());
             return nodos.toString();
         }
-        nodos.append(nodosNivelImprimir(r.retornaHI(), nivelActual + 1,nivelImprimir));
-        nodos.append(nodosNivelImprimir(r.retornaHD(), nivelActual + 1,nivelImprimir));
+        if(r.retornaHI() == null){
+            NodoAB aux = new NodoAB(" ");
+            nodos.append(nodosNivelImprimir(aux, nivelActual + 1,nivelImprimir));
+        }else{
+            nodos.append(nodosNivelImprimir(r.retornaHI(), nivelActual + 1,nivelImprimir));
+        }
+        if(r.retornaHD() == null){
+            NodoAB aux = new NodoAB(" ");
+            nodos.append(nodosNivelImprimir(aux, nivelActual + 1,nivelImprimir));
+        }else {
+            nodos.append(nodosNivelImprimir(r.retornaHD(), nivelActual + 1,nivelImprimir));
+        }
+
         return nodos.toString();
     }
 
-    public void imprimeArbol(NodoAB r){
-        StringBuilder sb = new StringBuilder();
-        String fila, espacioEntre, espacioFuera;
+
+    public String ArbolString(NodoAB r){
+        StringBuilder sb, sbAux;
+        String fila, espacioEntre;
         int altura, alturaAux, numeroEspacio;
+        sb = new StringBuilder();
         altura = alturaAB(raiz, 1);
-        alturaAux = altura + 2;
-        for(int i = 1; i <= altura; i++){
-            //if(i < altura){
-                numeroEspacio = numeroSecucencia(alturaAux);
+        alturaAux = altura;
+        if(altura >= 7){
+            for(int i = 1; i <= altura; i++){
+                numeroEspacio = numeroSecucencia(alturaAux + 1);
                 espacioEntre = repiteString(" ", numeroEspacio);
                 fila = nodosNivelImprimir(r, 1 , i);
-                fila = String.join(espacioEntre, fila.split(""));
-                fila = ponerEspacios(fila, alturaAux - 1);
-                numeroEspacio = numeroSecucencia(alturaAux - 1);
-                espacioFuera = repiteString(" ", numeroEspacio - 1);
-                System.out.println(fila);
-                /*if(i < altura){
-                    System.out.println(ponerEspacios(creaStringConector(altura + 1 -i) + espacioFuera, altura - i  + 1) );
-                }*/
-
-            //}else{
-
-           // }
-            alturaAux--;
+                if(i < altura){
+                    fila = String.join(espacioEntre, fila.split(""));
+                    fila = ponerEspacios(fila, alturaAux);
+                }else{
+                    String[] filaChar = fila.split("");
+                    sbAux = new StringBuilder();
+                    for(int j = 0; j < filaChar.length; j++){
+                        sbAux.append(filaChar[j]);
+                        sbAux.append("");
+                        if(j%2 == 0){
+                            sbAux.append(" ");
+                        }
+                    }
+                    fila = sbAux.toString();
+                }
+                sb.append(fila);
+                sb.append("\n");
+                alturaAux--;
+            }
         }
-    }
-    public void dibujaArbol(NodoAB r){
-        StringBuilder sb = new StringBuilder();
-        String fila, espacioEntre, espacioFuera;
-        int altura, alturaAux, numeroEspacio;
-        altura = alturaAB(raiz, 1);
-        alturaAux = altura + 2;
-        for(int i = 1; i <= altura; i++){
-            //if(i < altura){
-            numeroEspacio = numeroSecucencia(alturaAux);
-            espacioEntre = repiteString(" ", numeroEspacio);
-            fila = nodosNivelImprimir(r, 1 , i);
-            fila = String.join(espacioEntre, fila.split(""));
-            fila = ponerEspacios(fila, alturaAux - 1);
-            numeroEspacio = numeroSecucencia(alturaAux - 1);
-            espacioFuera = repiteString(" ", numeroEspacio - 1);
-            System.out.println(fila);
-                /*if(i < altura){
-                    System.out.println(ponerEspacios(creaStringConector(altura + 1 -i) + espacioFuera, altura - i  + 1) );
-                }*/
-
-            //}else{
-
-            // }
-            alturaAux--;
+        else{
+            for(int i = 1; i <= altura; i++){
+                numeroEspacio = numeroSecucencia(alturaAux + 2);
+                espacioEntre = repiteString(" ", numeroEspacio);
+                fila = nodosNivelImprimir(r, 1 , i);
+                if(i < altura){
+                    fila = String.join(espacioEntre, fila.split(""));
+                    fila = ponerEspacios(fila, alturaAux  + 1);
+                }else{
+                    String[] filaChar = fila.split("");
+                    sbAux = new StringBuilder();
+                    for(int j = 0; j < filaChar.length; j++){
+                        sbAux.append(filaChar[j]);
+                        sbAux.append(" ");
+                        if(j%2 == 0){
+                            sbAux.append("  ");
+                        }
+                    }
+                    fila = sbAux.toString();
+                }
+                sb.append(fila);
+                sb.append("\n");
+                alturaAux--;
+            }
         }
-    }
 
+        return sb.toString();
+    }
     //endregion
 
 }
