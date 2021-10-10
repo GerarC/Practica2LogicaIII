@@ -293,6 +293,29 @@ public class ArbolBinario {
         return hojas;
     }
 
+    public ArrayList<NodoAB> retornaNodos(NodoAB r){
+        ArrayList<NodoAB> nodos, nodosI, nodosD;
+        if(r == null) return null;
+        nodos = new ArrayList<>();
+        nodos.add(r);
+        nodosI = retornaHojasAB(r.retornaHI());
+        nodosD = retornaHojasAB(r.retornaHD());
+        if (nodosI != null){
+            for(NodoAB nab: nodosI){
+                if(nab != null){
+                    nodos.add(nab);
+                }
+            }
+        }
+        if (nodosD != null){
+            for(NodoAB nab: nodosD){
+                if(nab != null){
+                    nodos.add(nab);
+                }
+            }
+        }
+        return nodos;
+    }
     //region Métodos para Crear un "Dibujo" del árbol
 
     private String ponerEspacios(String str, int altura){

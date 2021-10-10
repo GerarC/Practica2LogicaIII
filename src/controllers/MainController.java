@@ -1,8 +1,13 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import models.NodoAB;
+
+import java.util.ArrayList;
 
 public class MainController {
 
@@ -21,9 +26,16 @@ public class MainController {
     @FXML
     private Menu mnuAcerca;
 
+
+
+    ArrayList<NodoAB> nodos = new ArrayList<NodoAB>();
+
     @FXML
     private void initialize(){
         return;
+
+
+
     }
 
     @FXML
