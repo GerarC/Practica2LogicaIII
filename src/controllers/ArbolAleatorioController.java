@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import models.ArbolBinario;
@@ -48,7 +47,7 @@ public class ArbolAleatorioController {
 
 
     ArbolBinario p = Model.getArbolInicial();
-    int tamaño = Model.getTamaño();
+
     ObservableList<String> InfoList = FXCollections
             .observableArrayList("Hijos","Hermano","Lado","Padre","Ancestros","Tío","Abuelo","Altura","Grado","Nodo-Hoja","Recorrido-InOrden","Recorrido-PreOrden","Recorrido-PosOrden");
 
@@ -56,14 +55,14 @@ public class ArbolAleatorioController {
 
 
     public void initialize() {
-        //tamaño;
-        //Aqui creamos el arbol de forma aleatoria y lo metemos al label
+
     }
 
     public void BtnAction(){
         String n= (String) InfoCB.getValue();
         NodoAB m= (NodoAB) NodoCb.getValue();
-
+        System.out.println(m);
+        System.out.println(m.retornaAbuelo());
         switch (n){
             case "Hijos":
                 JOptionPane.showMessageDialog(null, "");
@@ -166,33 +165,12 @@ public class ArbolAleatorioController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        stage.getIcons().add(new Image("assets/icons/tree.png"));
-        stage.getIcons().add(new Image("assets/icons/tree.png"));
-        stage.setTitle("Arbol Nuevo");
-        Stage myStage= (Stage) this.mnuBar.getScene().getWindow();
-        myStage.close();
 
     }
 
     @FXML
-    public void mnuCrearArbolAleatorio_action() throws IOException {
-        int tamaño = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el tamaño del arbol: "));
-        Model p = new Model(new ArbolBinario(),tamaño);
-
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/views/arbolAleatorio.fxml"));
-        Parent root2 = loader2.load();
-        ArbolAleatorioController controlador2 = loader2.getController();
-
-        Scene scene2 = new Scene(root2);
-        Stage stage2 = new Stage();
-        stage2.setScene(scene2);
-        stage2.setResizable(false);
-        stage2.getIcons().add(new Image("assets/icons/tree.png"));
-        stage2.setTitle("Arbol Aleatorio");
-        stage2.show();
-        Stage myStage= (Stage) this.mnuBar.getScene().getWindow();
-        myStage.close();
-
+    public void mnuCrearArbolAleatorio_action(){
+        return;
     }
 
 

@@ -20,11 +20,4 @@ public class Model {
         ArbolInicial = arbolInicial;
     }
 
-    public static int getTamaño() {
-        return Tamaño;
-    }
-
-    public static void setTamaño(int tamaño) {
-        Tamaño = tamaño;
-    }
 }

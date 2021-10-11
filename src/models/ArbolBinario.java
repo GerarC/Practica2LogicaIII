@@ -24,8 +24,6 @@ public class ArbolBinario {
 
 
     //Methods
-
-
     public void inorden(NodoAB r){
         if(r != null){
             inorden(r.retornaHI());
@@ -185,27 +183,6 @@ public class ArbolBinario {
         }
     }
 
-    public String inordenString(NodoAB r){
-        StringBuilder sb = new StringBuilder();
-        if(r != null){
-            if(r.retornaPadre() == null || r.retornaPadre().retornaHI() != r) sb.append("(");
-
-            if (r.retornaHI() != null){
-                sb.append(preordenString(r.retornaHI()));   //ingresamos izquierda
-            }
-            sb.append(r.retornaDato());     //ingresamos raiz
-
-            if(r.retornaHD() != null){
-                if(r.retornaHI() == null) sb.append("(");
-                sb.append(",");
-                sb.append(preordenString(r.retornaHD()));   //ingresamos derecha
-            }
-
-            if( r.retornaPadre() == null || r.retornaPadre().retornaHD() == null || r.retornaPadre().retornaHD() == r) sb.append(")");
-        }
-        return sb.toString();
-    }
-
     public String preordenString(NodoAB r){
         StringBuilder sb = new StringBuilder();
         if(r != null){
@@ -219,26 +196,6 @@ public class ArbolBinario {
                 sb.append(",");
                 sb.append(preordenString(r.retornaHD()));
             }
-            if( r.retornaPadre() == null || r.retornaPadre().retornaHD() == null || r.retornaPadre().retornaHD() == r) sb.append(")");
-        }
-        return sb.toString();
-    }
-
-    public String posordenString(NodoAB r){
-
-        StringBuilder sb = new StringBuilder();
-        if(r != null){
-            if(r.retornaPadre() == null || r.retornaPadre().retornaHD() != r) sb.append("(");
-
-            if (r.retornaHI() != null){
-                sb.append(preordenString(r.retornaHI()));   //ingresamos izquierda
-            }
-            if(r.retornaHD() != null){
-                if(r.retornaHI() == null) sb.append("(");
-                sb.append(",");
-                sb.append(preordenString(r.retornaHD()));   //ingresamos derecha
-            }
-            sb.append(r.retornaDato());     //ingresamos raiz
             if( r.retornaPadre() == null || r.retornaPadre().retornaHD() == null || r.retornaPadre().retornaHD() == r) sb.append(")");
         }
         return sb.toString();
@@ -285,55 +242,6 @@ public class ArbolBinario {
         ab.asignaRaiz(raiz);
 
         return ab;
-    }
-
-    public NodoAB padre(NodoAB r){
-        if (r != null){
-            return r.retornaPadre();
-        }else {
-            return null;
-        }
-    }
-
-    public NodoAB tio(NodoAB r){
-        if (r != null){
-            return r.retornaTio();
-        }else {
-            return null;
-        }
-    }
-
-    public NodoAB abuelo(NodoAB r){
-        if (r != null){
-            return r.retornaAbuelo();
-        }else {
-            return null;
-        }
-    }
-
-    public NodoAB hermano(NodoAB r){
-        if (r != null){
-            return r.retornaHermano();
-        }else {
-            return null;
-        }
-    }
-
-    public int lado(NodoAB r){
-        if (r != null){
-            return r.retornaLado();
-        }else {
-            return 0;
-        }
-    }
-
-    public ArrayList<NodoAB> hijos(NodoAB r){
-
-        if (r != null){
-            return r.RetornaHijos();
-        }else {
-            return null;
-        }
     }
 
     public ArrayList<NodoAB> ancestrosDelNodo(NodoAB r){
@@ -465,6 +373,7 @@ public class ArbolBinario {
 
         return nodos.toString();
     }
+
 
     public String ArbolString(NodoAB r){
         StringBuilder sb, sbAux;

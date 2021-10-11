@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,8 +16,7 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class MainController {
-    @FXML
-    AnchorPane PantallaInicial;
+
     @FXML
     private MenuBar mnuBar;
     @FXML
@@ -35,10 +33,11 @@ public class MainController {
     private Menu mnuAcerca;
 
     @FXML
-    private void initialize() {
-        //PantallaInicial.setStyle("-fx-background-color: radial-gradient(center 50px 50px, radius 100px, azul, #02b674);");
-        PantallaInicial.setStyle("-fx-background-color:#02b674");
+    private void initialize(){
+        return;
     }
+
+    //todo hacer que se cierre la ventana anterior
     @FXML
     public void mnuCrearArbolNuevo_action() throws IOException {
         //recibimos el Arbol y Su forma
@@ -92,11 +91,6 @@ public class MainController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        stage.getIcons().add(new Image("assets/icons/tree.png"));
-        stage.getIcons().add(new Image("assets/icons/tree.png"));
-        stage.setTitle("Arbol Nuevo");
-        Stage myStage= (Stage) this.mnuBar.getScene().getWindow();
-        myStage.close();
 
     }
 
@@ -113,11 +107,8 @@ public class MainController {
         Stage stage2 = new Stage();
         stage2.setScene(scene2);
         stage2.setResizable(false);
-        stage2.getIcons().add(new Image("assets/icons/tree.png"));
-        stage2.setTitle("Arbol Aleatorio");
         stage2.show();
-        Stage myStage= (Stage) this.mnuBar.getScene().getWindow();
-        myStage.close();
+
 
     }
 

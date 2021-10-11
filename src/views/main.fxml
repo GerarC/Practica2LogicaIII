@@ -25,16 +25,16 @@
       </MenuBar>
    </top>
    <center>
-      <AnchorPane fx:id="PantallaInicial" prefHeight="377.0" prefWidth="600.0" styleClass="radial-gradient(center 50px 50px, radius 100px, red, blue);" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="143.0" layoutY="42.0" text="Bienvenido!">
                <font>
                   <Font name="System Bold" size="61.0" />
                </font>
             </Label>
-            <Label layoutX="7.0" layoutY="167.0" text="Elija la Opcion que desee En el menu de Arriba" textFill="#0364cd">
+            <Label layoutX="22.0" layoutY="167.0" text="Elija la Opcion que desee En el menu de Arriba" textFill="#ea1e1e">
                <font>
-                  <Font name="System Bold Italic" size="27.0" />
+                  <Font size="27.0" />
                </font>
             </Label>
          </children>

@@ -29,9 +29,9 @@
          <content>
             <TextFlow fx:id="textFlow" prefHeight="374.0" prefWidth="504.0" textAlignment="CENTER">
                <children>
-                  <Label fx:id="ArbolLbl" lineSpacing="35.0" text="Arbol" textAlignment="CENTER" textFill="#09cd10">
+                  <Label fx:id="ArbolLbl" lineSpacing="35.0" text="Arbol" textAlignment="CENTER" textFill="#06b623">
                      <font>
-                        <Font name="System Bold" size="21.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font></Label>
                </children></TextFlow>
          </content>
