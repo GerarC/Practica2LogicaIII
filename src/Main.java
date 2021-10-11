@@ -34,10 +34,3 @@ public class Main extends Application {
 
 
 
-/*
-    Todo Hacer que la ventana anterior se cierre
-
-
-
-
-* */

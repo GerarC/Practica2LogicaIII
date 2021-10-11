@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,7 +17,8 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class MainController {
-
+    @FXML
+    AnchorPane PantallaInicial;
     @FXML
     private MenuBar mnuBar;
     @FXML
@@ -33,10 +35,10 @@ public class MainController {
     private Menu mnuAcerca;
 
     @FXML
-    private void initialize(){
-        return;
+    private void initialize() {
+        //PantallaInicial.setStyle("-fx-background-color: radial-gradient(center 50px 50px, radius 100px, azul, #02b674);");
+        PantallaInicial.setStyle("-fx-background-color:#02b674");
     }
-
     @FXML
     public void mnuCrearArbolNuevo_action() throws IOException {
         //recibimos el Arbol y Su forma
@@ -73,12 +75,14 @@ public class MainController {
 
 
             case 3:
-                String j = JOptionPane.showInputDialog("Ingrese recorrido por Comas:");
+                String j = "(B(B(O(N(,W(S,B)),R(Q(I,E),Y(,U))),A(P(,K(R,K)),R(B(G,Ñ)))),H(R(X(J(Y,M),P(V,J)),T(F(R,T),D(,E))),L(R(I(E,G),P(B,I)),Z(U,W(Ñ))))))";
+                //JOptionPane.showInputDialog("Ingrese recorrido por Comas:");
                 ArbolBinario ab = new ArbolBinario();
                 ab.construyeAB(j);
-                Model p = new Model(ab);
+                Model p = new Model(ab,0);
                 break;
         }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/arbolNuevo.fxml"));
         Parent root = loader.load();
         ArbolNuevoController controlador = loader.getController();
@@ -88,29 +92,35 @@ public class MainController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-
-
-
-
-
-
-
-
-
-
-
+        stage.getIcons().add(new Image("assets/icons/tree.png"));
+        stage.getIcons().add(new Image("assets/icons/tree.png"));
+        stage.setTitle("Arbol Nuevo");
+        Stage myStage= (Stage) this.mnuBar.getScene().getWindow();
+        myStage.close();
 
     }
 
     @FXML
-    public void mnuCrearArbolAleatorio_action(){
-        return;
+    public void mnuCrearArbolAleatorio_action() throws IOException {
+        int tamaño = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el tamaño del arbol: "));
+        Model p = new Model(new ArbolBinario(),tamaño);
+
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/views/arbolAleatorio.fxml"));
+        Parent root2 = loader2.load();
+        ArbolAleatorioController controlador2 = loader2.getController();
+
+        Scene scene2 = new Scene(root2);
+        Stage stage2 = new Stage();
+        stage2.setScene(scene2);
+        stage2.setResizable(false);
+        stage2.getIcons().add(new Image("assets/icons/tree.png"));
+        stage2.setTitle("Arbol Aleatorio");
+        stage2.show();
+        Stage myStage= (Stage) this.mnuBar.getScene().getWindow();
+        myStage.close();
+
     }
 
-    @FXML
-    public void mnuMostrarArbol_action(){
-        return;
-    }
 
     @FXML
     public void mnuSalir_action(){

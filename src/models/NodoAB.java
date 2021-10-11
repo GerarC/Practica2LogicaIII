@@ -102,6 +102,6 @@ public class NodoAB {
 
     @Override
     public String toString() {
-        return "NodoAB{" + "dato=" + dato + '}';
+        return "Nodo " + dato ;
     }
 }
